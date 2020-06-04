@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+  <title>ExperimentAPP</title>
+  <meta charset = "UTF-8" />
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body>
+  <div id="welcome"><h1>ExperimentAPP</h1></div>
+
+  <div id="menu">
+    <button id="newExpBtn">New</button>
+  </div>
+
+  <!-- The Modal -->
+<div id="newExpModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Start a New Experiment</p>
+    <div class="col s12 m6 l6">
+             <form id="newExp-form" data-action="create">
+                 <label for="title">Title:</label><br>
+                 <input type="text" name="title" id="title">
+                 <br><br>
+                 <label for="hypothesis">Hypothesis:</label><br>
+                 <textarea name="hypothesis" rows="8" cols="80" id="hypothesis"></textarea>
+                 <br>
+                 <input type="submit" value="Create" class="btn">
+              </form>
+      </div>
+  </div>
+
+</div>
+
+  <div class=" exp-lists">
+    
+  </div>
+
+  <script src="src/api.js"></script>
+  <script src="src/experiment.js"></script>
+  <script src="src/modal.js"></script>
+  <script src="src/index.js"></script>
+</body>
+</html>
