@@ -7,11 +7,30 @@ class API {
       "Accept": "application/json"
     }
   }
-
+//get all api data
   static get(){
     return(
       fetch('http://localhost:3000/api/v1/experiments')
       .then(resp => resp.json())
+    )
+  }
+
+//get data by id
+  static getShow(Id){
+    const url = API.baseUrl + `/${Id}`
+    console.log(url)
+    return(
+      fetch(url)
+      .then(resp => resp.json())
+      .then((data) =>{
+        //console.log(data)
+        if (!data.errors){
+          //if there are no errors then use the data to render correct show Modal
+          //Experiment.renderShowExperiment(data)
+
+          //Trial.renderShowExperiment(data)
+        }
+      })
     )
 
   }

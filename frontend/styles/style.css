@@ -8,6 +8,31 @@
     text-align: center;
   }
 
+  .trial-lists {
+    border: 1px solid black;
+  }
+
+  .trial-form {
+
+  }
+
+  .trialCard {
+    width: 10%;
+  }
+
+  .showContainer {
+
+  }
+
+  .expData {
+
+
+  }
+
+  .trial {
+
+  }
+
   .card  {
     width: 25%;
     border: 1px solid black;

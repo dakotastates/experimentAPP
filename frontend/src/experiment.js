@@ -31,13 +31,34 @@ class Experiment {
       </div>
 
     `)
-
   }
+
+
 
   renderExperiment(){
     experimentList.innerHTML += this.htmlifyExperiment()
 
   }
+
+
+/*
+//showPage tempate
+  static renderShowExperiment(data){
+    showContent.innerHTML = (`
+      <div class="showContainer">
+      <h3>${data.title}</h3>
+      <div class="expData">
+      Created: ${data.created_at}<br>
+      Hypothesis: <p>${data.hypothesis}</p>
+      </div>
+      <div class="trial">
+      Trials
+      </div>
+      </div>
+      `)
+
+  }
+  */
 
   static renderExperiments(){
 
@@ -60,4 +81,13 @@ class Experiment {
     })//render all experiments
 
   }
+
+/*
+  //load show page
+
+  static loadShow(){
+
+    Experiment.renderShowExperiment()
+  }
+  */
 }

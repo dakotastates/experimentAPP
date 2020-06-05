@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded",function(){
   Experiment.loadExperiments()
   mountFormListener()
   eventDelegation()
+  //Experiment.loadShow()
+  //Trial.loadShow()
+  //Trial.loadTrials()
 
 })
 
@@ -10,7 +13,11 @@ const formTitle = document.querySelector("#title")
 const formHypothesis = document.querySelector("#hypothesis")
 const expForm = document.getElementById("newExp-form")
 const experimentList = document.querySelector(".exp-lists")
+const showContent = document.querySelector(".showContent")
+const trialList = document.querySelector(".trial-lists")
+
 //let newExpModal = document.getElementById("newExpModal");
+
 
 function eventDelegation(){
   experimentList.addEventListener("click", function(e){
@@ -34,6 +41,15 @@ function eventDelegation(){
       const Id = e.target.parentElement.id
       console.log("delete", Id)
       API.delete(Id)
+    } else if (e.target.className === "card-content") {
+      const showId = e.target.id
+      showExpModal.style.display = "block";
+      API.getShow(showId)
+      TrialAPI.getTrials(showId)
+      //Trial.loadTrials(showId)
+       //Trial.expId = showId
+      // console.log(showId)
+
     }
   })
 }
@@ -46,6 +62,7 @@ function getExpData(){
     hypothesis: formHypothesis.value
   }
 }
+
 
 function clearForm(){
   delete expForm.dataset.idea

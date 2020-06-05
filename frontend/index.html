@@ -12,7 +12,7 @@
     <button id="newExpBtn">New</button>
   </div>
 
-  <!-- The Modal -->
+  <!-- The new/edit form Modal -->
 <div id="newExpModal" class="modal">
 
   <!-- Modal content -->
@@ -34,10 +34,36 @@
 
 </div>
 
-  <div class=" exp-lists">
-    
-  </div>
+<div id="showExpModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
 
+    <div class="showContent">
+      <div class="showContainer">
+        <div class="expData"></div>
+        <div class="trialContainer">
+          <div class="trial-lists"></div>
+          <div class="trial-form">
+            Submit an Observation:
+            <form id="newTrial-form" data-action="create">
+                <label for="observation">Observation:</label><br>
+                <textarea name="observation" rows="8" cols="80" id="observation"></textarea>
+                <br>
+                <input type="submit" value="Create Trial" class="btn">
+             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div class=" exp-lists"></div>
+
+  <script src="src/trialAPI.js"></script>
+  <script src="src/trial.js"></script>
   <script src="src/api.js"></script>
   <script src="src/experiment.js"></script>
   <script src="src/modal.js"></script>
