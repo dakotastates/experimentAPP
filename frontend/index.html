@@ -47,6 +47,7 @@
           <div class="trial-form">
             Submit an Observation:
             <form id="newTrial-form" data-action="create">
+                <input type="hidden" id="experiment_id" value=${this.expId}>
                 <label for="observation">Observation:</label><br>
                 <textarea name="observation" rows="8" cols="80" id="observation"></textarea>
                 <br>

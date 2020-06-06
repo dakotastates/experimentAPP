@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded",function(){
 
   Experiment.loadExperiments()
-  mountFormListener()
-  eventDelegation()
+  mountExpFormListener()
+  eventExpDelegation()
+  //mountTrialFormListener()
+  //eventTrialDelegation()
   //Experiment.loadShow()
   //Trial.loadShow()
   //Trial.loadTrials()
@@ -15,11 +17,16 @@ const expForm = document.getElementById("newExp-form")
 const experimentList = document.querySelector(".exp-lists")
 const showContent = document.querySelector(".showContent")
 const trialList = document.querySelector(".trial-lists")
+const trialForm = document.getElementById("newTrial-form")
+const formObservation = document.querySelector("#observation")
+const expData = document.querySelector(".expData")
+//const formExpId = document.querySelector("#experiment_id")
+
 
 //let newExpModal = document.getElementById("newExpModal");
 
 
-function eventDelegation(){
+function eventExpDelegation(){
   experimentList.addEventListener("click", function(e){
     if (e.target.className === "edit"){
       console.log("edit")
@@ -41,11 +48,19 @@ function eventDelegation(){
       const Id = e.target.parentElement.id
       console.log("delete", Id)
       API.delete(Id)
+
     } else if (e.target.className === "card-content") {
       const showId = e.target.id
+      const showExp = e.target
       showExpModal.style.display = "block";
       API.getShow(showId)
       TrialAPI.getTrials(showId)
+      mountTrialFormListener(showId)
+      getTrialData(showId)
+      //getExpData(showId)
+      //getExpId(showId)
+      //Trial.showExpData(showExp)
+
       //Trial.loadTrials(showId)
        //Trial.expId = showId
       // console.log(showId)
@@ -54,6 +69,42 @@ function eventDelegation(){
   })
 }
 
+/*
+function eventTrialDelegation(){
+  trialList.addEventListener("click", function(e){
+    if (e.target.className === "edit"){
+      console.log("edit")
+      //open Modal Form
+      //newExpModal.style.display = "block";
+      //grab all the data from this card
+      const [observation] = e.target.parentElement.querySelectorAll("span")
+      //populate the form with said values
+      formObservation.value = observation.innerText
+      //formHypothesis.value = hypothesis.innerText
+      trialForm.dataset.id = e.target.parentElement.id
+      //make changes to form to identify if its edit or delete DOMContentLoaded
+
+      document.querySelector(".btn").value = "Edit"
+        trialForm.dataset.action = "update"
+        //change the type of fetch sent!
+
+    }else if (e.target.className === "delete"){
+      const Id = e.target.parentElement.id
+      console.log("delete", Id)
+      TrialAPI.delete(Id)
+    } //else if (e.target.className === "card-content") {
+      //const showId = e.target.id
+      //showExpModal.style.display = "block";
+      //API.getShow(showId)
+      //TrialAPI.getTrials(showId)
+      //Trial.loadTrials(showId)
+       //Trial.expId = showId
+      // console.log(showId)
+
+    }
+  })
+}
+*/
 
 function getExpData(){
 
@@ -61,6 +112,15 @@ function getExpData(){
     title: formTitle.value,
     hypothesis: formHypothesis.value
   }
+}
+
+function getTrialData(id){
+//debugger
+  return {
+    experiment_id: id,
+    observation: formObservation.value
+  }
+
 }
 
 
@@ -71,7 +131,13 @@ function clearForm(){
   formHypothesis.value = ""
 }
 
-function mountFormListener(){
+/*
+function getExpId(data){
+console.log(data)
+}
+*/
+
+function mountExpFormListener(){
   //Identify the element you want to target
   expForm.addEventListener("submit", function(event){
     event.preventDefault()
@@ -84,5 +150,22 @@ function mountFormListener(){
       const Id = event.target.dataset.id
       API.patch(expObj, Id)
     }
+  })
+}
+
+function mountTrialFormListener(showId){
+  //Identify the element you want to target
+  trialForm.addEventListener("submit", function(event){
+    event.preventDefault()
+    //grab the text from each field
+    const trialObj = getTrialData(showId)
+    //const exId = showId
+      
+    if (trialForm.dataset.action === "create"){
+      TrialAPI.post(trialObj, showId)
+    }//else if (trialForm.dataset.action === "update"){
+      //const Id = event.target.dataset.id
+      //TrialAPI.patch(trailObj, Id)
+    //}
   })
 }

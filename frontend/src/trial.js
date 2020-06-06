@@ -18,8 +18,11 @@ class Trial {
         <div class="trialCard">
 
           <div class="trialCard-content" id="${this.id}">
+            ${this.expId}
             <h4>Observation</h4>
             <p><span> ${this.observation}</span></p>
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button><br><br>
           </div>
         </div>
       `)
@@ -34,6 +37,12 @@ class Trial {
       )
     }
 */
+/*
+  expId(){
+    return `${this.expId}`
+    //debugger
+  }
+  */
 
     renderTrial(){
       trialList.innerHTML += this.htmlifyTrial()
@@ -47,7 +56,15 @@ class Trial {
 
     }
 
+/*
+    static showExpData(data){
 
+      expData.innerHTML = `
+      <div class="showExp" id = ${data.id}></div>`
+      debugger
+    }
+
+*/
 
     static loadTrials(){
 
