@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded",function(){
   Experiment.loadExperiments()
   mountExpFormListener()
   eventExpDelegation()
+  //Trial.loadTrials()
   //mountTrialFormListener()
   //eventTrialDelegation()
   //Experiment.loadShow()
@@ -20,6 +21,7 @@ const trialList = document.querySelector(".trial-lists")
 const trialForm = document.getElementById("newTrial-form")
 const formObservation = document.querySelector("#observation")
 const expData = document.querySelector(".expData")
+const expDataContent = document.querySelector(".expDataContent")
 //const formExpId = document.querySelector("#experiment_id")
 
 
@@ -57,6 +59,9 @@ function eventExpDelegation(){
       TrialAPI.getTrials(showId)
       mountTrialFormListener(showId)
       getTrialData(showId)
+      eventTrialDelegation(showId)
+      //Experiment.renderShowExperiment(showExp)
+      //debugger
       //getExpData(showId)
       //getExpId(showId)
       //Trial.showExpData(showExp)
@@ -69,29 +74,33 @@ function eventExpDelegation(){
   })
 }
 
-/*
-function eventTrialDelegation(){
+
+function eventTrialDelegation(showId){
   trialList.addEventListener("click", function(e){
+    //debugger
     if (e.target.className === "edit"){
       console.log("edit")
+
       //open Modal Form
       //newExpModal.style.display = "block";
       //grab all the data from this card
       const [observation] = e.target.parentElement.querySelectorAll("span")
+
       //populate the form with said values
       formObservation.value = observation.innerText
       //formHypothesis.value = hypothesis.innerText
       trialForm.dataset.id = e.target.parentElement.id
       //make changes to form to identify if its edit or delete DOMContentLoaded
 
-      document.querySelector(".btn").value = "Edit"
+      document.querySelector(".trialBtn").value = "Edit"
         trialForm.dataset.action = "update"
         //change the type of fetch sent!
 
     }else if (e.target.className === "delete"){
       const Id = e.target.parentElement.id
       console.log("delete", Id)
-      TrialAPI.delete(Id)
+      //debugger
+      TrialAPI.delete(showId, Id)
     } //else if (e.target.className === "card-content") {
       //const showId = e.target.id
       //showExpModal.style.display = "block";
@@ -101,10 +110,10 @@ function eventTrialDelegation(){
        //Trial.expId = showId
       // console.log(showId)
 
-    }
+    //}
   })
 }
-*/
+
 
 function getExpData(){
 
@@ -125,10 +134,17 @@ function getTrialData(id){
 
 
 function clearForm(){
-  delete expForm.dataset.idea
+  delete expForm.dataset.id
   expForm.dataset.action = "create"
   formTitle.value = ""
   formHypothesis.value = ""
+}
+
+function clearTrialForm(){
+  delete trialForm.dataset.id
+  trialForm.dataset.action = "create"
+
+  formObservation.value = ""
 }
 
 /*
@@ -160,12 +176,12 @@ function mountTrialFormListener(showId){
     //grab the text from each field
     const trialObj = getTrialData(showId)
     //const exId = showId
-      
+
     if (trialForm.dataset.action === "create"){
       TrialAPI.post(trialObj, showId)
-    }//else if (trialForm.dataset.action === "update"){
-      //const Id = event.target.dataset.id
-      //TrialAPI.patch(trailObj, Id)
-    //}
+    }else if (trialForm.dataset.action === "update"){
+      const Id = event.target.dataset.id
+      TrialAPI.patch(trialObj, showId, Id)
+    }
   })
 }

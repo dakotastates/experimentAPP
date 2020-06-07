@@ -55,4 +55,67 @@ class TrialAPI{
     .catch(alert)
 
   }
+
+  static delete(expId, trialId){
+    const options ={
+      ...TrialAPI.options,
+      method:'DELETE'
+    }
+    const url = TrialAPI.baseUrl + `/${expId}` + `/trials/${trialId}`
+    //debugger
+
+    fetch(url, options)
+    .then(resp => resp.json())
+    .then((data) => {
+      if (!data.errors){
+
+        const index = Trial.all.findIndex((trial)=> trial.id === data.id)
+
+        Trial.all.splice(index,1)
+        Trial.renderTrials()
+        //filter through all experiments and get rid of deleted
+        //re render all experiments
+      } else{
+        throw new Error(`${data.errors}`)
+      }
+    })
+    .catch(alert)
+
+  }
+
+
+  static patch(data, expId, trialId){
+    const options ={
+      ...TrialAPI.options,
+      method: 'PATCH',
+      body: JSON.stringify({trial:data})
+    }
+    const url = TrialAPI.baseUrl + `/${expId}` + `/trials/${trialId}`
+
+
+    fetch(url,options)
+    .then(resp => resp.json())
+    .then((data) => {
+      if(!data.errors){
+        //create a new Trials
+        const editedTrials = Trial.all.map(trial =>{
+          if(Trial.id === data.id){
+            return new Trial(data)
+          }else{
+            return trial
+          }
+        })
+        Trial.all = editedTrials
+        Trial.renderTrials()
+      //  newExpModal.style.display = "none";
+       //clearTrialForm()
+      }else{
+        throw new Error(`${data.errors}`)
+      }
+    })
+    .catch(alert)
+
+  }
+
+
 }

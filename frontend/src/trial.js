@@ -18,9 +18,10 @@ class Trial {
         <div class="trialCard">
 
           <div class="trialCard-content" id="${this.id}">
-            ${this.expId}
-            <h4>Observation</h4>
-            <p><span> ${this.observation}</span></p>
+            <div class="inCard">
+              <h4>Observation</h4>
+              <p><span> ${this.observation}</span></p>
+            </div>
             <button class="edit">Edit</button>
             <button class="delete">Delete</button><br><br>
           </div>
@@ -53,7 +54,7 @@ class Trial {
       trialList.innerHTML = "<h3>List of Trials</h3>"
 
       Trial.all.forEach(trial => trial.renderTrial())
-
+      clearTrialForm()
     }
 
 /*

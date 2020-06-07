@@ -41,19 +41,22 @@
 
     <div class="showContent">
       <div class="showContainer">
-        <div class="expData"></div>
-        <div class="trialContainer">
-          <div class="trial-lists"></div>
+        <div class="expData">Experiment Data<br>
+          <div class="expDataContent"></div>
           <div class="trial-form">
             Submit an Observation:
             <form id="newTrial-form" data-action="create">
-                <input type="hidden" id="experiment_id" value=${this.expId}>
-                <label for="observation">Observation:</label><br>
-                <textarea name="observation" rows="8" cols="80" id="observation"></textarea>
+
+                <label for="observation"></label><br>
+                <textarea name="observation" rows="8" cols="70" id="observation"></textarea>
                 <br>
-                <input type="submit" value="Create Trial" class="btn">
+                <input type="submit" value="Create Trial" class="trialBtn">
              </form>
           </div>
+        </div>
+        <div class="trialContainer">
+          <div class="trial-lists"></div>
+
         </div>
       </div>
     </div>

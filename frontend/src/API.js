@@ -26,7 +26,7 @@ class API {
         //console.log(data)
         if (!data.errors){
           //if there are no errors then use the data to render correct show Modal
-          //Experiment.renderShowExperiment(data)
+          Experiment.renderShowExperiment(data)
 
           //Trial.renderShowExperiment(data)
         }

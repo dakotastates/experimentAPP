@@ -23,12 +23,13 @@ span.onclick = function() {
   newExpModal.style.display = "none";
   clearForm();
 
+
 }
 
 // When the user clicks on <span> (x), close the modal
 span2.onclick = function() {
   showExpModal.style.display = "none";
-
+  clearTrialForm();
 }
 
 
@@ -38,7 +39,9 @@ window.onclick = function(event) {
   if (event.target == newExpModal) {
     newExpModal.style.display = "none";
     clearForm();
+
   } else if (event.target == showExpModal){
     showExpModal.style.display = "none";
+    clearTrialForm();
   }
 }

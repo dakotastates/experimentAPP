@@ -1,6 +1,6 @@
 class Api::V1::TrialsController < ApplicationController
 before_action :find_trial, only:[:show, :update, :destroy]
-before_action :find_experiment, only:[:index, :create]
+before_action :find_experiment, only:[:index, :create, :update, :destroy]
 
 def index
 
@@ -16,6 +16,20 @@ def create
   else
     render json:{errors: @trial.errors.full_messages}
   end
+end
+
+def update
+  if @trial.update(trial_params)
+    render json: @trial
+  else
+    render json:{errors: @trial.errors.full_messages}
+  end
+
+end
+
+def destroy
+  @trial.destroy
+  render json: @trial
 end
 
   private

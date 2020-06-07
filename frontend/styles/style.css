@@ -10,10 +10,22 @@
 
   .trial-lists {
     border: 1px solid black;
+
   }
 
   .trial-form {
-  
+
+    padding: 10px;
+    margin-right: 40px;
+    margin-top: 40px;
+
+
+  }
+
+  .inCard {
+    overflow:auto;
+
+
   }
 
   .trialCard-content {
@@ -21,17 +33,44 @@
     border: 1px solid black;
     padding: 10px;
     float: left;
-    margin-right: 40px;
-    margin-top: 40px;
+    margin-right: 10px;
+    margin-left: :10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-radius: 25px;
+    overflow:auto;
+
+  }
+
+  .trialContainer{
+    width: 45%;
+    border: 1px solid black;
+    padding: 10px;
+    float: right;
+
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 25px;
+    overflow:auto;
   }
 
   .showContainer {
+    overflow:auto;
 
   }
 
-  .expData {
+  .showContent {
+    overflow:auto;
+  }
 
+  .expData {
+    width: 45%;
+    border: 1px solid black;
+    padding: 10px;
+    float: left;
+
+    margin-top: 40px;
+    border-radius: 25px;
 
   }
 

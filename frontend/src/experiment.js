@@ -41,24 +41,18 @@ class Experiment {
   }
 
 
-/*
+
 //showPage tempate
   static renderShowExperiment(data){
-    showContent.innerHTML = (`
-      <div class="showContainer">
+    
+    expDataContent.innerHTML = (`
       <h3>${data.title}</h3>
-      <div class="expData">
       Created: ${data.created_at}<br>
       Hypothesis: <p>${data.hypothesis}</p>
-      </div>
-      <div class="trial">
-      Trials
-      </div>
-      </div>
       `)
 
   }
-  */
+
 
   static renderExperiments(){
 
@@ -90,4 +84,5 @@ class Experiment {
     Experiment.renderShowExperiment()
   }
   */
+
 }
