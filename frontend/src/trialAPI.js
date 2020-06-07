@@ -85,6 +85,7 @@ class TrialAPI{
 
 
   static patch(data, expId, trialId){
+
     const options ={
       ...TrialAPI.options,
       method: 'PATCH',
@@ -97,12 +98,17 @@ class TrialAPI{
     .then(resp => resp.json())
     .then((data) => {
       if(!data.errors){
+
         //create a new Trials
         const editedTrials = Trial.all.map(trial =>{
+
           if(Trial.id === data.id){
+            
             return new Trial(data)
+
           }else{
             return trial
+
           }
         })
         Trial.all = editedTrials

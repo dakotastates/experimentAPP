@@ -1,15 +1,8 @@
 document.addEventListener("DOMContentLoaded",function(){
-
   Experiment.loadExperiments()
   mountExpFormListener()
   eventExpDelegation()
-  //Trial.loadTrials()
-  //mountTrialFormListener()
-  //eventTrialDelegation()
-  //Experiment.loadShow()
-  //Trial.loadShow()
-  //Trial.loadTrials()
-
+  //success()
 })
 
 const formTitle = document.querySelector("#title")
@@ -22,10 +15,53 @@ const trialForm = document.getElementById("newTrial-form")
 const formObservation = document.querySelector("#observation")
 const expData = document.querySelector(".expData")
 const expDataContent = document.querySelector(".expDataContent")
-//const formExpId = document.querySelector("#experiment_id")
+var elements = document.getElementsByClassName("classname");
+const successBtns = document.getElementsByClassName("success");
+const failBtns = document.getElementsByClassName("failure")
 
 
-//let newExpModal = document.getElementById("newExpModal");
+
+function success(){
+
+  for (successBtn of successBtns){
+    //console.log(successBtn)
+    successBtn.addEventListener("click", sendSuccess)
+  }
+}
+
+function failure(){
+
+  for (failBtn of failBtns){
+    //console.log(successBtn)
+    failBtn.addEventListener("click", sendFail)
+  }
+}
+
+async function sendSuccess(e){
+  const trialId = e.target.parentElement.id
+  const expId = e.target.parentElement.querySelector(".inCard").id
+  let success = parseInt(e.target.parentElement.querySelector(".successes").innerText)
+
+  //debugger
+  success ++
+  const postObj = {
+    success
+  }
+  TrialAPI.patch(postObj, expId, trialId)
+  //console.log(trialId)
+}
+
+async function sendFail(e){
+  const trialId = e.target.parentElement.id
+  const expId = e.target.parentElement.querySelector(".inCard").id
+  let failure = parseInt(e.target.parentElement.querySelector(".failures").innerText)
+  failure --
+  const postObj = {
+    failure
+  }
+  TrialAPI.patch(postObj, expId, trialId)
+  console.log(trialId)
+}
 
 
 function eventExpDelegation(){
@@ -60,16 +96,9 @@ function eventExpDelegation(){
       mountTrialFormListener(showId)
       getTrialData(showId)
       eventTrialDelegation(showId)
-      //Experiment.renderShowExperiment(showExp)
-      //debugger
-      //getExpData(showId)
-      //getExpId(showId)
-      //Trial.showExpData(showExp)
 
-      //Trial.loadTrials(showId)
-       //Trial.expId = showId
-      // console.log(showId)
-
+      //successAndFail(showId)
+      //success()
     }
   })
 }
@@ -101,16 +130,12 @@ function eventTrialDelegation(showId){
       console.log("delete", Id)
       //debugger
       TrialAPI.delete(showId, Id)
-    } //else if (e.target.className === "card-content") {
-      //const showId = e.target.id
-      //showExpModal.style.display = "block";
-      //API.getShow(showId)
-      //TrialAPI.getTrials(showId)
-      //Trial.loadTrials(showId)
-       //Trial.expId = showId
-      // console.log(showId)
 
-    //}
+    } else if (e.target.className === "success") {
+      success()
+    }else if (e.target.className === "failure") {
+      failure()
+    }
   })
 }
 
@@ -169,12 +194,13 @@ function mountExpFormListener(){
   })
 }
 
-function mountTrialFormListener(showId){
+ function mountTrialFormListener(showId){
   //Identify the element you want to target
   trialForm.addEventListener("submit", function(event){
     event.preventDefault()
     //grab the text from each field
     const trialObj = getTrialData(showId)
+    
     //const exId = showId
 
     if (trialForm.dataset.action === "create"){

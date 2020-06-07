@@ -1,11 +1,12 @@
 class Experiment {
   static all = []
 
-  constructor({id, title, hypothesis}){
+  constructor({id, title, hypothesis, created_at}){
 
     this.id = id
     this.title = title
     this.hypothesis = hypothesis
+    this.created_at = created_at
 
     Experiment.all.push(this)
     //debugger
@@ -21,7 +22,8 @@ class Experiment {
           <h3><span class="card-title"> ${this.title}</span></h3>
           <h4>Hypothesis:</h4>
           <p><span> ${this.hypothesis}</span></p>
-          <span>Successes: </span>
+          <p><span> Created at: ${this.created_at}</span></p>
+          <span>Successes: </span><br>
           <span>Failures: </span><br><br>
           <button class="edit">Edit</button>
           <button class="delete">Delete</button><br><br>
@@ -44,7 +46,7 @@ class Experiment {
 
 //showPage tempate
   static renderShowExperiment(data){
-    
+
     expDataContent.innerHTML = (`
       <h3>${data.title}</h3>
       Created: ${data.created_at}<br>

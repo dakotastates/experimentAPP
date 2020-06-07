@@ -43,7 +43,7 @@ end
   end
 
   def trial_params
-    params.require(:trial).permit(:experiment_id, :observation)
+    params.require(:trial).permit(:experiment_id, :observation, :success, :failure)
   end
 
 end
